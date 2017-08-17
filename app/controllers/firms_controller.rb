@@ -6,6 +6,7 @@ class FirmsController < ApplicationController
   end
 
   def show
+    @bookmark = Bookmark.new
     @firm = Firm.find(params[:id])
 
     render("firms/show.html.erb")
