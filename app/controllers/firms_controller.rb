@@ -1,6 +1,11 @@
 class FirmsController < ApplicationController
   def index
     @firms = Firm.all
+    @location_hash = Gmaps4rails.build_markers(@firms.where.not(:mappable_address_latitude => nil)) do |firm, marker|
+      marker.lat firm.mappable_address_latitude
+      marker.lng firm.mappable_address_longitude
+      marker.infowindow "<h5><a href='/firms/#{firm.id}'>#{firm.name}</a></h5><small>#{firm.mappable_address_formatted_address}</small>"
+    end
 
     render("firms/index.html.erb")
   end
