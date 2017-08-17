@@ -1,6 +1,7 @@
 class FirmsController < ApplicationController
   def index
-    @firms = Firm.page(params[:page]).per(10)
+    @q = Firm.ransack(params[:q])
+    @firms = @q.result(:distinct => true).includes(:visits).page(params[:page]).per(10)
     @location_hash = Gmaps4rails.build_markers(@firms.where.not(:mappable_address_latitude => nil)) do |firm, marker|
       marker.lat firm.mappable_address_latitude
       marker.lng firm.mappable_address_longitude
