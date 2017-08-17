@@ -1,5 +1,7 @@
 ActiveAdmin.register Firm do
 
+ permit_params :name, :mappable_address, :address, :category, :city, :state
+
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
