@@ -1,0 +1,38 @@
+<div class="page-header">
+  <h1>
+    Firms
+    <a href="/firms/new" class="btn btn-lg btn-success">New Firm</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Name</th>
+        <th>Mappable address</th>
+        <th>Address</th>
+        <th>Category</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @firms.each do |firm| %>
+      <tr>
+        <td><%= firm.name %></td>
+        <td><%= firm.mappable_address %></td>
+        <td><%= firm.address %></td>
+        <td><%= firm.category %></td>
+        <td><%= firm.city %></td>
+        <td><%= firm.state %></td>
+        <td>
+          <a href="/firms/<%= firm.id %>" class="btn btn-primary">Show</a>
+          <a href="/firms/<%= firm.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_firm/<%= firm.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

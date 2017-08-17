@@ -1,0 +1,82 @@
+<!-- Validation failure messages -->
+<% if @firm.errors.any? %>
+  <% @firm.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Firm</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_firm" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @firm.name %>">
+      </div>
+
+      <!-- Label and input for mappable_address -->
+      <div class="form-group">
+        <label for="mappable_address" class="control-label">
+          Mappable address
+        </label>
+
+        <input type="text" id="mappable_address" name="mappable_address" placeholder="Mappable address" class="form-control" value="<%= @firm.mappable_address %>">
+      </div>
+
+      <!-- Label and input for address -->
+      <div class="form-group">
+        <label for="address" class="control-label">
+          Address
+        </label>
+
+        <input type="text" id="address" name="address" placeholder="Address" class="form-control" value="<%= @firm.address %>">
+      </div>
+
+      <!-- Label and input for category -->
+      <div class="form-group">
+        <label for="category" class="control-label">
+          Category
+        </label>
+
+        <input type="text" id="category" name="category" placeholder="Category" class="form-control" value="<%= @firm.category %>">
+      </div>
+
+      <!-- Label and input for city -->
+      <div class="form-group">
+        <label for="city" class="control-label">
+          City
+        </label>
+
+        <input type="text" id="city" name="city" placeholder="City" class="form-control" value="<%= @firm.city %>">
+      </div>
+
+      <!-- Label and input for state -->
+      <div class="form-group">
+        <label for="state" class="control-label">
+          State
+        </label>
+
+        <input type="text" id="state" name="state" placeholder="State" class="form-control" value="<%= @firm.state %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Firm
+      </button>
+      or
+      <a href="/firms">Cancel</a>
+    </form>
+  </div>
+</div>
