@@ -86,16 +86,8 @@
 </div>
 
 
-<div class="row m-b-2">
-  <div class="col-md-12">
-    <div>
-      <div id="location_map" style="height: 480px;"></div>
-    </div>
-  </div>
-</div>
-
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
     <table class="table table-striped table-hover">
       <tr>
         <th>Name</th>
@@ -125,7 +117,20 @@
     </table>
     <%= paginate @firms, theme: 'twitter-bootstrap-4' %>
   </div>
+
+
+<div class="col-md-6">
+  <div class="panel panel-default">
+  <div class="panel-heading">Map</div>
+  <div class="panel-body">
+      <div id="location_map" style="height: 480px;"></div>
+  </div>
 </div>
+</div>
+
+<!--row-->
+</div>
+
 
 <script src="//maps.google.com/maps/api/js?v=3.24&key=AIzaSyCOTPWiuvyyo6sKoIBzKA4-1ol-vTOIOlM"></script>
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
@@ -137,3 +142,4 @@
     handler.fitMapToBounds();
   });
 </script>
+
