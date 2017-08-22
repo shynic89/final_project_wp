@@ -3,9 +3,11 @@ class Firm < ApplicationRecord
 
   def geocode_mappable_address
     if self.mappable_address.present?
-      url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{URI.encode(self.mappable_address)}"
+      require 'open-uri'
+      url = URI.parse("http://maps.googleapis.com/maps/api/geocode/json?address=#{URI.encode(self.mappable_address)}")
 
-      raw_data = open(url).read
+      raw_data = url.read
+      puts raw_data.class
 
       parsed_data = JSON.parse(raw_data)
 
