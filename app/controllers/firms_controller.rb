@@ -6,6 +6,12 @@ class FirmsController < ApplicationController
       marker.lat firm.mappable_address_latitude
       marker.lng firm.mappable_address_longitude
       marker.infowindow "<h5><a href='/firms/#{firm.id}'>#{firm.name}</a></h5><small>#{firm.mappable_address_formatted_address}</small>"
+     end
+       
+    if params[:location].present?
+      @firmssearch = Firm.near(params[:location], params[:distance] || 10, order: :distance)
+    else
+      @firmssearch = Firm.all
     end
 
     render("firms/index.html.erb")

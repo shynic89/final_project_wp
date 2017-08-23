@@ -1,6 +1,10 @@
 class Firm < ApplicationRecord
   before_validation :geocode_mappable_address
-
+  
+  geocoded_by :mappable_address
+  after_validation :geocode
+  
+  
   def geocode_mappable_address
     if self.mappable_address.present?
       require 'open-uri'
