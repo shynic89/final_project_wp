@@ -10,6 +10,8 @@
   <%= submit_tag "Search" %>
 <% end %>
 
+
+
 </div>
 
 <div class="row mb-1">
@@ -71,6 +73,7 @@
         <th>Category</th>
         <th>City</th>
         <th>State</th>
+        <th>Target</th>
       </tr>
 
       <% @firms.each do |firm| %>
@@ -80,7 +83,29 @@
         <td><%= firm.category %></td>
         <td><%= firm.city %></td>
         <td><%= firm.state %></td>
-
+        <td>
+          <% if Bookmark.where(:firm_id => firm.id).where(:user_id => current_user.id).exists? %>
+          <form action="/delete_bookmark/<%= Bookmark.find_by(:firm_id => firm.id, :user_id => current_user.id).id %>">
+          <button class="btn btn-link">
+                  <i class="fa fa-heart"></i>
+                </button>
+                </form>
+                
+                <% else %>
+                <form action="/create_bookmark" method="post">
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+                <input type="hidden" name="firm_id" value="<%= firm.id %>">
+                <input type="hidden" name="user_id" value="<%= current_user.id %>">
+              
+                 <button class="btn btn-link">
+                  <i class="fa fa-heart-o"></i>
+                </button>
+                  </form>
+                  <% end %>
+                </td>
+        
+        
+        
       </tr>
       <% end %>
     </table>

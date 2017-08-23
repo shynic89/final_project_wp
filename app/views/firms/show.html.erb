@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h3>Firm #<%= @firm.id %></h3>
+  <h3><%= @firm.name %></h3>
 </div>
 
 <div class="row">
@@ -7,14 +7,7 @@
     <dl class="dl-horizontal">
       <dt>Name</dt>
       <dd><%= @firm.name %></dd>
-
-      <dt>Mappable address</dt>
-      <dd>
-        <div>
-          <div id="location_map" style="height: 480px;"></div>
-        </div>
-      </dd>
-
+      
       <dt>Address</dt>
       <dd><%= @firm.address %></dd>
 
@@ -26,6 +19,14 @@
 
       <dt>State</dt>
       <dd><%= @firm.state %></dd>
+
+      <dt>Mappable address</dt>
+      <dd>
+        <div>
+          <div id="location_map" style="height: 480px;"></div>
+        </div>
+      </dd>
+
 
     </dl>
 
