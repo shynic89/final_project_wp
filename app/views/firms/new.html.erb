@@ -50,9 +50,15 @@
         <label for="category" class="control-label">
           Category
         </label>
-
-        <input type="text" id="category" name="category" placeholder="Category" class="form-control" value="<%= @firm.category %>">
+        
+        <select id="category" name="category" class="form-control">
+  <option value="PE Firm">PE Firm</option>
+  <option value="Investor">Investor</option>
+  <option value="Hotel">Hotel</option>
+  <option value="Other">Other</option>
+</select>
       </div>
+      
 
       <!-- Label and input for city -->
       <div class="form-group">
