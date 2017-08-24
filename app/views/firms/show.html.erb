@@ -1,12 +1,29 @@
 <div class="page-header">
   <h3><%= @firm.name %></h3>
+   <% if Bookmark.where(:firm_id => @firm.id).where(:user_id => current_user.id).exists? %>
+          <form action="/delete_bookmark/<%= Bookmark.find_by(:firm_id => @firm.id, :user_id => current_user.id).id %>">
+          <button class="btn btn-link">
+                  <i class="fa fa-heart"></i>
+                </button>
+                </form>
+                
+                <% else %>
+                <form action="/create_bookmark" method="post">
+                <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+                <input type="hidden" name="firm_id" value="<%= @firm.id %>">
+                <input type="hidden" name="user_id" value="<%= current_user.id %>">
+              
+                 <button class="btn btn-link">
+                  <i class="fa fa-heart-o"></i>
+                </button>
+                  </form>
+                  <% end %>
 </div>
 
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
-      <dt>Name</dt>
-      <dd><%= @firm.name %></dd>
+
       
       <dt>Address</dt>
       <dd><%= @firm.address %></dd>
@@ -44,59 +61,6 @@
   </div>
 </div>
 
-<!-- A Firm has many visits -->
-
-<div class="row">
-  <div class="col-md-12">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
-        Visits
-      </li>
-
-      <% @firm.visits.each do |bookmark| %>
-        <li class="list-group-item">
-          <a href="/bookmarks/<%= bookmark.id %>">
-            <%= bookmark.firm_id %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/bookmarks/<%= bookmark.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/bookmarks/<%= bookmark.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_bookmark/<%= bookmark.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
-        </li>
-      <% end %>
-
-      <li class="list-group-item">
-        <form action="/create_bookmark" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
-      <!-- Label and input for firm_id -->
-      <input type="hidden" name="firm_id" value="<%= @firm.id %>">
-
-      <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
-
-        <%= select_tag(:user_id, options_from_collection_for_select(User.all, :id, :email), :class => "form-control") %>
-      </div>
-
-      <button class="btn btn-block btn-success">
-        Create Bookmark
-      </button>
-    </form>
-      </li>
-    </ul>
-  </div>
-</div>
 
 
 <script src="//maps.google.com/maps/api/js?v=3.24&key=AIzaSyCOTPWiuvyyo6sKoIBzKA4-1ol-vTOIOlM"></script>
