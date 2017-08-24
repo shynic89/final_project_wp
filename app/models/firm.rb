@@ -1,17 +1,12 @@
 class Firm < ApplicationRecord
   before_validation :geocode_mappable_address
   
-  geocoded_by :mappable_address
-  after_validation :geocode
-  
-  
   def geocode_mappable_address
     if self.mappable_address.present?
       require 'open-uri'
       url = URI.parse("http://maps.googleapis.com/maps/api/geocode/json?address=#{URI.encode(self.mappable_address)}")
 
       raw_data = url.read
-      puts raw_data.class
 
       parsed_data = JSON.parse(raw_data)
 
