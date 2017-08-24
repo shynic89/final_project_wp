@@ -1,15 +1,12 @@
-<div class="page-header">
-
-
-</div>
 
 <div class="row mb-1">
   <div class="col-md-12">
-    <%= search_form_for @q, :class => collapse_search_form, :id => "firms_filters" do |f| %>
-      <p class="lead">Narrow results:</p>
+    <%= search_form_for @q, :id => "firms_filters" do |f| %>
 
 <div class="form-group">
+ <%= f.label "Category:   " %> 
   <% Firm.all.select("DISTINCT(CATEGORY)").each do |firm| %>
+
     <label>
       <%= check_box_tag('q[category_matches_any][]', firm.category, (true if @q.category_eq_any.try(:include?, firm.category))) %>
       <%= firm.category %>
@@ -43,9 +40,7 @@
 
       <a href="/firms" class="btn btn-default btn-block mb-1">Clear filters</a>
     <% end %>
-    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#firms_filters">
-      Show Filters
-    </a>
+
   </div>
 </div>
 
